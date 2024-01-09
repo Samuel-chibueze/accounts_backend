@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser,UserHistory,UserProfileModel
+from .models import CustomUser,UserHistory,UserProfileModel,CryptoModel
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -51,6 +51,7 @@ class UserHistorySerializer(serializers.ModelSerializer):
         fields ="__all__"
 
 
+
         
 class UserPassWordVerification(serializers.ModelSerializer):
     class Meta:
@@ -85,3 +86,18 @@ class PassWordValidation(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     email= serializers.EmailField(required=True)
     password = serializers.CharField(required=True)
+
+class CryptoAvailableSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=CryptoModel
+        fields ="__all__"
+
+
+# class UserHistorySerializer(serializers.Serializer):
+#     user = serializers.CharField()
+#     amount = serializers.FloatField(max_length=20, default=0.00)
+#     payment_method= serializers.CharField(max_length=20)
+#     status = serializers.CharField(max_length=11, default="Pending")
+#     disc = serializers.CharField(max_length=100, default="user deposit")
+#     Transaction = serializers.CharField(max_length=11)
+#     created_at = serializers.DateField(auto_now=True)

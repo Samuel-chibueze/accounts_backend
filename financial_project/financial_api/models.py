@@ -51,7 +51,15 @@ STATUS_FEILD = (
 
 TRANSACTION_FEILD= (
     ('Withdrawal', 'Withdrawal'),
-    ('Deposit', 'Deposit')
+    ('Deposit', 'Deposit'),
+    ('Plan', 'Plan')
+)
+PLANS_FEILD= (
+    ('Starter Plan', 'Starter Plan'),
+    ('Pro Plan', 'Pro Plan'),
+    ('Advanced Plan', 'Advanced Plan'),
+    ('Premium Plan', 'Premium Plan'),
+    ('Vip Plan', 'Vip Plan')
 )
 
     
@@ -70,10 +78,19 @@ class UserProfileModel(models.Model):
 
 class UserHistory(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    amount = models.FloatField(max_length=20)
+    amount = models.FloatField(max_length=20, default=0.00)
+    payment_method= models.CharField(max_length=20)
     status = models.CharField(max_length=11,choices=STATUS_FEILD, default="Pending")
+    disc = models.CharField(max_length=100, default="user deposit")
     Transaction = models.CharField(max_length=11,choices=TRANSACTION_FEILD)
     created_at = models.DateField(auto_now=True)
 
     def __str__(self):
         return f"{self.Transaction} {self.user.id}"
+
+class CryptoModel(models.Model):
+    bitcoin = models.CharField(default="this is the default crypto available " , max_length=70)
+    etherium = models.CharField(default="this is the default crypto available ",max_length=70)
+    litecoin = models.CharField(default="this is the default crypto available ", max_length=70)
+    usdt = models.CharField(default="this is the default crypto available ", max_length=70)
+
